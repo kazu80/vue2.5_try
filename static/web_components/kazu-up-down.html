@@ -1,0 +1,53 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+
+<dom-module id="kazu-up-down">
+    <template>
+        <style>
+            paper-button.indigo {
+                background-color : var(--paper-indigo-500);
+                color            : white;
+
+                                 --paper-button-raised-keyboard-focus: {
+                                     background-color : var(--paper-pink-a200) !important;
+                                     color            : white !important;
+                                 };
+            }
+
+            paper-button.indigo:hover {
+                background-color : var(--paper-indigo-400);
+            }
+        </style>
+
+        <div>{{val}}</div>
+        <paper-button id="up" class="indigo" on-click="up">UP</paper-button>
+        <paper-button id="down" class="indigo" on-click="down">DOWN</paper-button>
+    </template>
+
+    <script>
+        class KazuUpDown extends Polymer.Element {
+            static get is () { return 'kazu-up-down'; }
+
+            static get properties () {
+                return {
+                    val: {
+                        type : Number,
+                        value: 0
+                    }
+                }
+            }
+
+            up () {
+                console.log('foo');
+                this.dispatchEvent (new CustomEvent ('up_val'));
+            }
+
+            down () {
+                this.dispatchEvent (new CustomEvent ('down_val'));
+            }
+        }
+
+        customElements.define (KazuUpDown.is, KazuUpDown);
+    </script>
+</dom-module>

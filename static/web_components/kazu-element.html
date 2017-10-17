@@ -1,0 +1,30 @@
+<script>
+    const template = document.createElement ('template');
+    template.innerHTML = `
+    <div>My name is kazu</div>
+            `.trim ();
+
+    class KazuElement extends HTMLElement {
+        constructor () {
+            super ();
+
+            const shadow = this.attachShadow ({mode: 'open'});
+
+            const clone = document.importNode (template.content, true);
+            shadow.appendChild (clone);
+
+            const img = document.createElement ('img');
+            img.width = '150';
+            img.height = '150';
+            img.alt = 'this is image';
+
+            shadow.appendChild (img);
+        }
+
+        connectedCallback () {
+            console.log ('connectedCallback');
+        }
+    }
+
+    customElements.define ('kazu-element', KazuElement);
+</script>

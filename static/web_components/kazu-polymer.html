@@ -1,0 +1,64 @@
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+<dom-module id="kazu-polymer">
+    <template>
+        <style>
+            paper-button.indigo {
+                background-color : var(--paper-indigo-500);
+                color            : white;
+
+                                 --paper-button-raised-keyboard-focus: {
+                                     background-color : var(--paper-pink-a200) !important;
+                                     color            : white !important;
+                                 };
+            }
+
+            paper-button.indigo:hover {
+                background-color : var(--paper-indigo-400);
+            }
+        </style>
+
+        <div>Hello Polymer</div>
+        <paper-button class="indigo" on-click="handleClick">paper button!!! :)</paper-button>
+    </template>
+
+    <script>
+        class KazuPolymer extends Polymer.Element {
+            static get is () { return 'kazu-polymer'; }
+
+            static get properties () {
+                return {
+                    isClick       : {
+                        type  : Boolean,
+                        value : false,
+                        notify: true,
+                    },
+                    clickButtonFoo: {
+                        type: Object
+                    }
+                }
+            }
+
+            constructor () {
+                super ();
+            }
+
+            clickButton () {
+                this.isClick = !this.isClick;
+
+                console.log (this.clickButtonFoo);
+                // this.clickButtonFoo();
+
+                //this.fire('click-button', {}, {});
+            }
+
+            handleClick (e) {
+                this.dispatchEvent (new CustomEvent ('kick', {detail: {kicked: true}}));
+            }
+        }
+
+        customElements.define (KazuPolymer.is, KazuPolymer);
+    </script>
+</dom-module>

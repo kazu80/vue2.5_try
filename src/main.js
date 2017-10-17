@@ -7,7 +7,7 @@ Vue.config.productionTip = false;
 
 Vue.component('child', {
     props: ['myMessage', 'initialCounter'],
-    template: '<span>{{ normalizedCounter }}</span>',
+    template: '<button v-on:click.native="foo">{{ normalizedCounter }}</button>',
     mounted: function () {
     },
     data: function () {
@@ -17,7 +17,16 @@ Vue.component('child', {
         normalizedCounter: function () {
             return this.myMessage.trim().toLowerCase()
         }
+    },
+    methods: {
+        foo () {
+            console.log('component click event!');
+        }
     }
+});
+
+Vue.component('bs-date-input', {
+    template: '<input type="date" class="form-control">'
 });
 
 /* eslint-disable no-new */
@@ -26,6 +35,20 @@ new Vue ({
              // template  : '<App/>',
              components: {
                  App
+             },
+             methods: {
+                 foo () {
+                     console.log('foo');
+                 }
              }
          });
 
+
+const child = document.getElementById('child');
+child.addEventListener('foo', function () {
+    console.log('native click event!');
+});
+
+function foo () {
+    console.log('foo');
+}
